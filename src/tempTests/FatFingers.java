@@ -1,5 +1,7 @@
-package src.tempTests;
-import src.testUtils.*;
+package tempTests;
+
+
+import testUtils.*;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -250,3 +252,4 @@ public class FatFingers {
 		return contexts;
 	}	
 }
+
