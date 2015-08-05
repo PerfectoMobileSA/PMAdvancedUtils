@@ -3,5 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/MobileCloud Library"/>
+	<classpathentry kind="lib" path="C:/Users/shirk/OneDrive - Perfecto Mobile/Work/Selenium/Drivers/jSoup/jsoup-1.8.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
