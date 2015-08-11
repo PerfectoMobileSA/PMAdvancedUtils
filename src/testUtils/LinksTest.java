@@ -3,17 +3,14 @@ package testUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import java.util.concurrent.TimeUnit;
 
-import org.jsoup.Jsoup;
+import org.openqa.selenium.By;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.jsoup.*;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.openqa.selenium.By;
-import org.openqa.selenium.remote.RemoteWebDriver;
-
-
 public final class LinksTest extends TestUtils{
 
 	private String url;
