@@ -110,7 +110,7 @@ public class TestDummyTest {
 				String host = "demo.perfectomobile.com";
 				String user = URLEncoder.encode("shirk@perfectomobile.com", "UTF-8");
 				String password = URLEncoder.encode("Shitaki1", "UTF-8");
-				capabilities.setCapability("description", "Avner");
+				capabilities.setCapability("description", "ShirNate");
 				capabilities.setCapability("platformName", "Android");
 				
 				

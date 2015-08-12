@@ -14,31 +14,60 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import testUtils.*;
 
 
-/******************
- * Dummy test Section:
+// TODO: Auto-generated Javadoc
+/**
+ * ****************
+ * Dummy test Section:.
  */
 public final class DummyTest extends TestUtils{
 
 	
+	/** The rand. */
 	private Random rand;
+	
+	/** The rand helper. */
 	private Random randHelper;
+	
+	/** The start coord. */
 	private Point startCoord;
+	
+	/** The end coord. */
 	private Point endCoord;
 	
+	/** The min value. */
 	private int minValue;
+	
+	/** The max value. */
 	private int maxValue;
+	
+	/** The size of range. */
 	private int sizeOfRange;
 	
+	/** The seed. */
 	private long seed;
+	
+	/** The is seed random. */
 	private boolean isSeedRandom;
 	
 	
+	
+	/**
+	 * Instantiates a new dummy test.
+	 *
+	 * @param driver the driver
+	 */
 	public DummyTest(RemoteWebDriver driver) {
 		
 		this(driver,-1);
 		
 	}
 	
+	/**
+	 * Instantiates a new dummy test.
+	 *
+	 * @param driver the driver
+	 * @param seed the seed
+	 */
 	public DummyTest (RemoteWebDriver driver, long seed){
 		super(driver);
 		randHelper = new Random();
@@ -69,12 +98,22 @@ public final class DummyTest extends TestUtils{
 	   
 	}
 	
+	/**
+	 * Gets the random seed.
+	 *
+	 * @return the random seed
+	 */
 	public long getRandomSeed(){
 		//Log.debug("Get value of Seed is: "+ this.seed);
 		return this.seed;
 	}
 	
 	
+	/**
+	 * Sets the random seed.
+	 *
+	 * @param seed the new random seed
+	 */
 	public void setRandomSeed(long seed){
 		
 		if (seed == -1){
@@ -87,20 +126,59 @@ public final class DummyTest extends TestUtils{
 		
 	}
 	
+	/**
+	 * Dummy test.
+	 *
+	 * @param appName the app name
+	 * @return true, if successful
+	 * @throws InterruptedException the interrupted exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public boolean dummyTest(String appName) throws InterruptedException, IOException{
 		
 		return dummyTest(appName, Constants.dummyActionsNumber, Constants.dummyTimeout, Constants.dummyTimeoutUnit);
 	}
 	
+	/**
+	 * Dummy test.
+	 *
+	 * @param appName the app name
+	 * @param actionsNumber the actions number
+	 * @return true, if successful
+	 * @throws InterruptedException the interrupted exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public boolean dummyTest(String appName , int actionsNumber) throws InterruptedException, IOException{
 		
 		return dummyTest(appName, actionsNumber, Constants.dummyTimeout, Constants.dummyTimeoutUnit);
 	}
 
+	/**
+	 * Dummy test.
+	 *
+	 * @param appName the app name
+	 * @param timeout the timeout
+	 * @param unit the unit
+	 * @return true, if successful
+	 * @throws InterruptedException the interrupted exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public boolean dummyTest(String appName, long timeout, TimeUnit unit) throws InterruptedException, IOException{
 	
 		return dummyTest(appName,Constants.dummyActionsNumber, timeout, unit);
 	}
+	
+	/**
+	 * Dummy test.
+	 *
+	 * @param appName the app name
+	 * @param actionsNumber the actions number
+	 * @param timeout the timeout
+	 * @param unit the unit
+	 * @return true, if successful
+	 * @throws InterruptedException the interrupted exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public boolean dummyTest(String appName, int actionsNumber, long timeout, TimeUnit unit) throws InterruptedException, IOException{
 		
 		//parameters
@@ -188,6 +266,9 @@ public final class DummyTest extends TestUtils{
 	}
 	
 	
+	/**
+	 * Sets the random points.
+	 */
 	private void setRandomPoints(){
 		
 		startCoord.x = rand.nextInt(this.resolutionWidth);
@@ -197,6 +278,9 @@ public final class DummyTest extends TestUtils{
 		
 	}
 	
+	/**
+	 * Random touch.
+	 */
 	private void randomTouch(){
 		
 		String operation="single";
@@ -232,6 +316,9 @@ public final class DummyTest extends TestUtils{
 	}
 	
 	
+	/**
+	 * Random drag.
+	 */
 	private void randomDrag(){
 		
 		String auxiliary="tap";
@@ -273,6 +360,9 @@ public final class DummyTest extends TestUtils{
 		
 	}
 	
+	/**
+	 * Random swipe.
+	 */
 	private void randomSwipe(){
 		
 		try {
@@ -289,6 +379,9 @@ public final class DummyTest extends TestUtils{
 		
 	}
 	
+	/**
+	 * Random gesture.
+	 */
 	private void randomGesture(){
 		
 		String operation="zoom";
@@ -332,6 +425,9 @@ public final class DummyTest extends TestUtils{
 		}
 	}
 	
+	/**
+	 * Random action.
+	 */
 	private void randomAction(){
 		
 		switch (rand.nextInt(4)){
@@ -352,6 +448,13 @@ public final class DummyTest extends TestUtils{
 		}
 	}
 	
+	/**
+	 * Point to string.
+	 *
+	 * @param point the point
+	 * @param args the args
+	 * @return the string
+	 */
 	private String pointToString(Point point, boolean... args){
 		String strPoint =  point.x + "," + point.y;
 		
@@ -361,6 +464,12 @@ public final class DummyTest extends TestUtils{
 		return strPoint;
 	}
 	
+	/**
+	 * Check log for exception.
+	 *
+	 * @return true, if successful
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private boolean checkLogForException() throws IOException{
 		Map<String, Object> params = new HashMap<>();
 		params.put("tail", 1000);

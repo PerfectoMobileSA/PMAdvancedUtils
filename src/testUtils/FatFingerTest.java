@@ -11,32 +11,62 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FatFingerTest.
+ */
 public final class FatFingerTest extends TestUtils {
 	
+	/** The rand. */
 	private Random rand;
+	
+	/** The rand helper. */
 	private Random randHelper;
+	
+	/** The start coord. */
 	private Point startCoord;
+	
+	/** The end coord. */
 	private Point endCoord;
 	
+	/** The min value. */
 	int minValue;
+	
+	/** The size of range. */
 	int sizeOfRange;
 	
+	/** The seed. */
 	long seed;
+	
+	/** The is seed random. */
 	boolean isSeedRandom;
 	
 	
+	/** The center of element. */
 	Point centerOfElement;
 	
+	/** The element dimension. */
 	Dimension elementDimension;
 	
+	/** The max y. */
 	int minX, minY,maxX,maxY;
 	
+	/** The new point. */
 	Point newPoint;
+	
+	/** The pixels to add. */
 	int pixelsToAdd;
+	
+	/** The actual pixels to add. */
 	int actualPixelsToAdd;
 	
 	
 	
+	/**
+	 * Instantiates a new fat finger test.
+	 *
+	 * @param driver the driver
+	 */
 	public FatFingerTest(RemoteWebDriver driver) {
 		super(driver);
 		
@@ -63,6 +93,12 @@ public final class FatFingerTest extends TestUtils {
 	
 	}
 	
+	/**
+	 * Click.
+	 *
+	 * @param element the element
+	 * @param pixels the pixels
+	 */
 	public void click(WebElement element, int pixels){
 		Map<String, Object> params = new HashMap<>();	
 		try {
@@ -112,12 +148,22 @@ public final class FatFingerTest extends TestUtils {
 		
 	}
 	
+	/**
+	 * Gets the random seed.
+	 *
+	 * @return the random seed
+	 */
 	public long getRandomSeed(){
 		//Log.debug("Get value of Seed is: "+ this.seed);
 		return this.seed;
 	}
 	
 	
+	/**
+	 * Sets the random seed.
+	 *
+	 * @param seed the new random seed
+	 */
 	public void setRandomSeed(long seed){
 		
 		if (seed == -1){
@@ -131,6 +177,9 @@ public final class FatFingerTest extends TestUtils {
 	}
 	
 
+		/**
+		 * Sets the new point.
+		 */
 		private void setNewPoint(){
 			Constants.directions side = Constants.directions.getRandom();
 			int newX=0;
@@ -161,6 +210,11 @@ public final class FatFingerTest extends TestUtils {
 		}
 
 		
+		/**
+		 * Swipe.
+		 *
+		 * @param side the side
+		 */
 		void swipe(Constants.directions side){
 			
 			switch (side) {

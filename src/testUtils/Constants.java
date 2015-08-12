@@ -3,27 +3,55 @@ package testUtils;
 import java.util.concurrent.TimeUnit;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Constants.
+ */
 public class Constants {
 	
+	/** The default fat fingers. */
 	//farFingures:
 	public static int defaultFatFingers = 45;
+	
+	/**
+	 * The Enum directions.
+	 */
 	public static enum directions {
+		
+		/** The up. */
 		UP,
+		
+		/** The down. */
 		DOWN,
+		
+		/** The left. */
 		LEFT,
+		
+		/** The right. */
 		RIGHT;
 		
+		/**
+		 * Gets the random.
+		 *
+		 * @return the random
+		 */
 		public static directions getRandom() {
 	        return values()[(int) (Math.random() * values().length)];
 	    }
 
 	}
 	
+	/** The Link broken msg. */
 	//broken links Page Variables:
 	public static String LinkBrokenMsg = "Broken Link";
+	
+	/** The Link load error msg. */
 	public static String LinkLoadErrorMsg = "Page Load Error";
+	
+	/** The Link success msg. */
 	public static String LinkSuccessMsg = "Page Load Success";
 	
+	/** The load page errors. */
 	public static String [] loadPageErrors = {
 		"is not available",
 		"safari could not open",
@@ -142,21 +170,40 @@ public class Constants {
 		"599 Network connect timeout error"};
 	*/
 	
+	/** The page load timeout. */
 	public static long pageLoadTimeout = 25;						
 	
 	
+	/**
+	 * The Enum logFileTypes.
+	 */
 	//Log Constants:
 	public enum logFileTypes {
-		DummyTest,BrokenLinks,FatFingers;
+		
+		/** The Dummy test. */
+		DummyTest,
+/** The Broken links. */
+BrokenLinks,
+/** The Fat fingers. */
+FatFingers;
 		
 		
 	}
 	
+	/** The dummy actions number. */
 	//DummyTestConstants
 	public static int dummyActionsNumber = 100;
+	
+	/** The dummy timeout. */
 	public static long dummyTimeout = 300;
+	
+	/** The dummy timeout unit. */
 	public static TimeUnit dummyTimeoutUnit = TimeUnit.SECONDS;
+	
+	/** The dummy device bounderies. */
 	public static double dummyDeviceBounderies = 0.05;
+	
+	/** The dummy max seed. */
 	public static int dummyMaxSeed = 5000;
 
 	

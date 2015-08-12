@@ -1,4 +1,6 @@
 
+import io.appium.java_client.MobileDriver;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +17,6 @@ import org.openqa.selenium.interactions.*;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.WebDriver.*;
 
-import com.perfectomobile.selenium.*;
 import com.perfectomobile.selenium.api.*;
 import com.perfectomobile.selenium.by.*;
 import com.perfectomobile.selenium.dom.*;
@@ -28,7 +29,6 @@ import com.perfectomobile.selenium.options.touch.*;
 import com.perfectomobile.selenium.options.visual.*;
 import com.perfectomobile.selenium.options.visual.image.*;
 import com.perfectomobile.selenium.options.visual.text.*;
-
 import com.perfectomobile.httpclient.MediaType;
 import com.perfectomobile.httpclient.utils.FileUtils;
 
