@@ -42,14 +42,14 @@ public class MobileTest {
 		// The user must have the ECLIPSE role in this case.
 		// Otherwise, use the constructor that receives the host, user and password. E.g.
 		// MobileDriver driver = new MobileDriver(host, user, password);
-		MobileDriver driver = new MobileDriver();
+		//MobileDriver driver = new MobileDriver();
 
 		try {
          // write your code here
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			driver.quit();
+			//driver.quit();
 		}
 		System.out.println("Run ended");
 	}

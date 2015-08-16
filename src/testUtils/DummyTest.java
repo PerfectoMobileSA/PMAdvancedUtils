@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+//import org.openqa.selenium.remote.RemoteWebDriver;
+
+
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import testUtils.*;
@@ -35,13 +38,16 @@ public final class DummyTest extends TestUtils{
 	private Point endCoord;
 	
 	/** The min value. */
-	private int minValue;
+	private int minHeightValue;
+	private int minWidthValue;
 	
 	/** The max value. */
-	private int maxValue;
+	private int maxHeightValue;
+	private int maxWidthValue;
 	
 	/** The size of range. */
-	private int sizeOfRange;
+	private int sizeOfRangeHeight;
+	private int sizeOfRangeWidth;
 	
 	/** The seed. */
 	private long seed;
@@ -89,9 +95,13 @@ public final class DummyTest extends TestUtils{
 	   resolutionHeight = Integer.parseInt((String) driver.executeScript("mobile:handset:info", params));
 	   
 	   //sets limits of the screen
-	   minValue = (int) (Constants.dummyDeviceBounderies * this.resolutionHeight);
-	   maxValue = (int) this.resolutionHeight - minValue;
-	   sizeOfRange = maxValue - minValue + 1;
+	   minHeightValue = (int) (Constants.dummyDeviceBounderies * this.resolutionHeight);
+	   maxHeightValue = (int) this.resolutionHeight - minHeightValue;
+	   sizeOfRangeHeight = maxHeightValue - minHeightValue + 1;
+	   //sets limits of the screen
+	   minWidthValue = (int) (Constants.dummyDeviceBounderies * this.resolutionWidth);
+	   maxWidthValue = (int) this.resolutionWidth - minWidthValue;
+	   sizeOfRangeWidth = maxWidthValue - minWidthValue + 1;
 	   //sizeOfRangeZoom = this.resolutionHeight-
 		
 		
@@ -271,10 +281,10 @@ public final class DummyTest extends TestUtils{
 	 */
 	private void setRandomPoints(){
 		
-		startCoord.x = rand.nextInt(this.resolutionWidth);
-		startCoord.y = rand.nextInt(sizeOfRange) + minValue;
-		endCoord.x = rand.nextInt(this.resolutionWidth);
-		endCoord.y = rand.nextInt(sizeOfRange) + minValue;
+		startCoord.x = rand.nextInt(sizeOfRangeWidth) + minWidthValue;
+		startCoord.y = rand.nextInt(sizeOfRangeHeight) + minHeightValue;
+		endCoord.x = rand.nextInt(sizeOfRangeWidth) + minWidthValue;
+		endCoord.y = rand.nextInt(sizeOfRangeHeight) + minHeightValue;
 		
 	}
 	
@@ -392,7 +402,7 @@ public final class DummyTest extends TestUtils{
 				operation = "pinch";
 				//set new end coordinates:
 				int maxPinchX = Math.min(endCoord.x, resolutionWidth-endCoord.x);
-				int maxPinchY = (int) Math.min(endCoord.y - minValue, maxValue);
+				int maxPinchY = (int) Math.min(endCoord.y - minHeightValue, maxHeightValue);
 				
 				startCoord.x = rand.nextInt(maxPinchX);
 				startCoord.y = rand.nextInt(maxPinchY);
@@ -401,7 +411,7 @@ public final class DummyTest extends TestUtils{
 				operation = "zoom";
 				//set new end coordinates:
 				int maxZoomX = Math.min(startCoord.x, resolutionWidth-startCoord.x);
-				int maxZoomY = (int) Math.min(startCoord.y - minValue, maxValue);
+				int maxZoomY = (int) Math.min(startCoord.y - minHeightValue, maxHeightValue);
 				
 				endCoord.x = rand.nextInt(maxZoomX);
 				endCoord.y = rand.nextInt(maxZoomY);

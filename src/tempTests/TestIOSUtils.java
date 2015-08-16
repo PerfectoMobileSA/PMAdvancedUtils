@@ -1,5 +1,8 @@
 package tempTests;
-import testUtils.*;
+
+import deviceUtils.DeviceUtils;
+
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,12 +16,13 @@ import java.util.List;
 import java.util.Map;
 
 
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.*;
 
 import com.perfectomobile.selenium.util.EclipseConnector;
 
-public class TestDummyTest {
+public class TestIOSUtils {
 	
 	static RemoteWebDriver driver;
 	
@@ -30,21 +34,18 @@ public class TestDummyTest {
 		
 		try {
          
-			DummyTest testUtils = new DummyTest(driver);
-			//testUtils.setRandomSeed(2309);
-			/*if (testUtils.dummyTest("Play Store", 100)){
-				System.out.println("Found an Exception");
-				return;
-			}*/
+			DeviceUtils iosDriver = new DeviceUtils(driver);
+			System.out.println(iosDriver.getDeviceProperty("os"));
+			/*
+			iosDriver.sendSMS("Hello","+972542288664");
+			if (iosDriver.placeCall("+972542288664"))
+				iosDriver.endCall();*/
 			
-			if (testUtils.dummyTest("Maps", 300)){
-				System.out.println("Found an Exception");
-				return;
-			}
+			iosDriver.clearSafariCache();
 			
+			System.out.println("Hello");
 			
-			
-			
+						
 			
 			
 			
@@ -110,7 +111,7 @@ public class TestDummyTest {
 				String password = URLEncoder.encode("Shitaki1", "UTF-8");
 				capabilities.setCapability("description", "ShirNate");
 				capabilities.setCapability("platformName", "iOS");
-				
+				capabilities.setCapability("automationName","PerfectoMobile"); 
 				
 				//The below code shares the test execution with the Eclipse plug-in, thus enabling sharing the devices. 
 				try { 

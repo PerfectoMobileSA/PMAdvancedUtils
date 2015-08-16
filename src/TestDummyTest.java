@@ -1,4 +1,4 @@
-package tempTests;
+
 import testUtils.*;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -17,6 +17,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.remote.*;
 
 import com.perfectomobile.selenium.util.EclipseConnector;
+
+
 
 public class TestDummyTest {
 	
@@ -109,7 +111,7 @@ public class TestDummyTest {
 				String user = URLEncoder.encode("shirk@perfectomobile.com", "UTF-8");
 				String password = URLEncoder.encode("Shitaki1", "UTF-8");
 				capabilities.setCapability("description", "ShirNate");
-				capabilities.setCapability("platformName", "iOS");
+				capabilities.setCapability("platformName", "Android");
 				
 				
 				//The below code shares the test execution with the Eclipse plug-in, thus enabling sharing the devices. 
@@ -124,7 +126,7 @@ public class TestDummyTest {
 				
 				url = new URL("https://" + user + ':' + password + '@' + host + "/nexperience/wd/hub");
 				//create the driver:
-			//sleep(30000);
+			sleep(30000);
 
 
 
