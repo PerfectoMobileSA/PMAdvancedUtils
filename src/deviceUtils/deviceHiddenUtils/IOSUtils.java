@@ -9,14 +9,20 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.perfectomobile.httpclient.execution.DeviceProperty;
 
+import deviceUtils.DeviceUtilsInterface;
 import testUtils.PerfectoUtils;
 
- public class iOSUtils {
+ public class IOSUtils implements DeviceUtilsInterface{
 
-	public static RemoteWebDriver driver;
-	
-	public iOSUtils(RemoteWebDriver driver) {
+	 	public static RemoteWebDriver driver;
+		private static Map<String, String> deviceProperties;
+		private String os;
+		
+	public IOSUtils(RemoteWebDriver driver) {
 		this.driver = driver;
+		PerfectoUtils.getDeviceProperties(driver);
+		os = PerfectoUtils.getDeviceProperty("os");
+		
 	}
 	
 	/**********************************************************************
@@ -27,7 +33,7 @@ import testUtils.PerfectoUtils;
 	 *         @param device    the device to launch application SMS application on
 	 *         @return    true/false upon success or failure
 	 **********************************************************************/
-	public static boolean launchSMSApp() {
+	private static boolean launchSMSApp() {
 		Map<String, Object> params = new HashMap<>();
 	    
         //launch Messages Application
@@ -78,7 +84,7 @@ import testUtils.PerfectoUtils;
 	 *         @param destinationPhoneNumber    the phone number to send SMS to
 	 *         @return    true/false upon success or failure
 	 **********************************************************************/
-	public static void sendSMS(String message, String destinationPhoneNumber) {
+	public void sendSMS(String message, String destinationPhoneNumber) {
 	        
         if (!launchSMSApp())
             return;
@@ -105,7 +111,7 @@ import testUtils.PerfectoUtils;
 	 *        @param destinationPhoneNumber    the phone number to place call to
 	 *         @return    true/false upon success or failure
 	 **********************************************************************/
-	public static boolean placeCall(String destinationPhoneNumber){
+	public boolean placeCall(String destinationPhoneNumber){
 	    char digit;    //will be used to get a specific digit from the destination phone number
 	    String xpath;    //will be used to create a xpath string
 	    WebElement element; //will be used for elements on Page
@@ -186,14 +192,15 @@ import testUtils.PerfectoUtils;
 	}
 	
 	//Clear safari cache
-	public static void clearSafariCache(String osVer){
+	public void clearSafariCache(){
         //defining variables
         HashMap<String, Object> params = new HashMap();
         
+        
         PerfectoUtils.switchToContext(driver,"NATIVE_APP");
         //get os version:
-        //params.put("property", "osVersion");
-        //osVer = (String) driver.executeScript("mobile:handset:info", params);
+       
+        String osVer = PerfectoUtils.getDeviceProperty("osVersion");
         //Launch Settings Application on it's main page
         params.clear();
         params.put("name", "Settings");
@@ -239,6 +246,65 @@ import testUtils.PerfectoUtils;
             driver.executeScript("mobile:application.element:click", params);
         }
     }
+	
+	
+	/**********************************************************************
+	 *         This method Toggles  Wi-Fi On and Off.
+	 *                  
+	 *         @param device    the device to toggle Wi-Fi on
+	 *         @param state    ON/OFF
+	 **********************************************************************/
+	public void toggleWiFi(boolean state) {
+	    
+		Map<String, Object> params = new HashMap<>();
+	    WebElement element;
+	    String res;
+	                
+	    try {
+	        //open menu
+	    	driver.executeScript("mobile:handset:ready", params);
+	    	params.put("start", "50%,100%");
+			params.put("end", "50%,20%");
+			params.put("duration", "1");
+			driver.executeScript("mobile:touch:swipe", params);
+
+			//get wifi status
+			PerfectoUtils.switchToContext(driver,"NATIVE_APP");
+	        element = driver.findElement(By.xpath("//*[@label='Wi-Fi']"));
+	        res=element.getAttribute("value");
+	    
+	        
+	        //check if we need to toggle:
+	        if ((res.equals("0") && state) || (res.equals("1") && !state)){
+	            //Toggle WiFi
+	            element.click();
+
+	        }
+	        params.clear();
+	        driver.executeScript("mobile:handset:ready", params);
+	        
+	    } catch (Exception e) {
+	        System.out.println(e.toString());
+	                    
+	        params.clear();
+	        driver.executeScript("mobile:handset:ready", params);
+	        
+	    }
+
+	}
+
+	@Override
+	public String getDeviceProperty(String Property) {
+		return PerfectoUtils.getDeviceProperty(Property);
+	}
+
+	@Override
+	public void sendSMSFullNavigation(String message,
+			String destinationPhoneNumber) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }
 

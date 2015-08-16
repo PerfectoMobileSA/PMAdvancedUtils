@@ -1,7 +1,12 @@
 package tempTests;
 
-import deviceUtils.DeviceUtils;
 
+
+import deviceUtils.DeviceUtilsInterface;
+//import deviceUtils.deviceHiddenUtils.IOSUtils;
+
+import deviceUtils.deviceHiddenUtils.AndroidUtils;
+import deviceUtils.deviceHiddenUtils.IOSUtils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -14,6 +19,10 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+
+
+
 
 
 
@@ -33,15 +42,21 @@ public class TestIOSUtils {
 		
 		
 		try {
-         
-			DeviceUtils iosDriver = new DeviceUtils(driver);
+			DeviceUtilsInterface iosDriver = new IOSUtils(driver);
+			DeviceUtilsInterface androidDriver = new AndroidUtils(driver);
 			System.out.println(iosDriver.getDeviceProperty("os"));
 			/*
 			iosDriver.sendSMS("Hello","+972542288664");
 			if (iosDriver.placeCall("+972542288664"))
-				iosDriver.endCall();*/
+				iosDriver.endCall();
 			
-			iosDriver.clearSafariCache();
+			//iosDriver.clearSafariCache();
+			 
+			 
+			iosDriver.toggleWiFi(false);
+			*/
+			androidDriver.sendSMSFullNavigation("Hello", "+972542288664");
+			androidDriver.sendSMS("Hello", "+972542288664");
 			
 			System.out.println("Hello");
 			
@@ -110,7 +125,7 @@ public class TestIOSUtils {
 				String user = URLEncoder.encode("shirk@perfectomobile.com", "UTF-8");
 				String password = URLEncoder.encode("Shitaki1", "UTF-8");
 				capabilities.setCapability("description", "ShirNate");
-				capabilities.setCapability("platformName", "iOS");
+				capabilities.setCapability("platformName", "Android");
 				capabilities.setCapability("automationName","PerfectoMobile"); 
 				
 				//The below code shares the test execution with the Eclipse plug-in, thus enabling sharing the devices. 

@@ -215,6 +215,67 @@ public class PerfectoUtils {
 		  return true;
 	  }
 	  
+	  /*****
+		 * PRIAVTE METHOD SECTION
+		 */
+		
+		/********************************************************************************
+		 * This method builds the dictionary of all device properties in a key=value
+		 * format.
+		 * for example:
+		 * model=iPhone6
+		 * deviceId=ABCD89765
+		 *******************************************************************************/
+		public static HashMap<String,String> getDeviceProperties(RemoteWebDriver driver) {
+		    //hashmap to contain device properties
+		    deviceProperties = new HashMap<String, String>();
+	        
+	        Map<String, Object> params = new HashMap<>();
+	        params.put("property", "ALL");
+	        String properties = (String) driver.executeScript("mobile:handset:info", params);
+
+	        List<String> items = Arrays.asList(properties.split(","));
+	        String key,value;
+	       //build hashmap for all device properties:
+	        for (int i = 0; i < items.size(); i=i+2) {
+	    	    key=items.get(i);
+	    	    if (key.startsWith("[")||key.startsWith(" ")){
+	    		    key=key.substring(1);
+	    	    }
+		        value=items.get(i+1);
+		        if(value.startsWith(" ")){
+		    	    value=value.substring(1);
+		        }
+		        if (value.startsWith("[")){
+		    	    for (int j = i+2; j < items.size(); j++) {
+		    		    value=value+","+items.get(j);
+		                if (value.endsWith("]")){
+		            	    value=value.substring(1,value.length()-1);
+		                    i=j-1;
+		                    break;
+		                }
+		            }
+		        }
+		        if (value.endsWith("]")){
+		        	  value=value.substring(0,value.length()-1);
+		        }
+		        deviceProperties.put(key, value);
+	        }
+			return (HashMap<String, String>) deviceProperties;
+	       
+		 }
+		
+	    /*****************************************************************************
+	    * gets a specific device property out of the Dictionary.
+	    * returns the value of the property
+	    * for example:
+	    * getDeviceProperty("Model") will return the model of the device(ie iPhone-6)
+	    ******************************************************************************/
+	    public static String getDeviceProperty(String Property){
+	    	return (deviceProperties.get(Property));
+	    }
+
+	  
 	 
 	 
 	  
