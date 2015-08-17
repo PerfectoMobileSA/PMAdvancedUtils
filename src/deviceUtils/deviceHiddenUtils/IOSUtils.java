@@ -298,13 +298,6 @@ import testUtils.PerfectoUtils;
 		return PerfectoUtils.getDeviceProperty(Property);
 	}
 
-	@Override
-	public void sendSMSFullNavigation(String message,
-			String destinationPhoneNumber) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	
 }
 

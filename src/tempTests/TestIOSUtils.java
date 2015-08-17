@@ -43,6 +43,7 @@ public class TestIOSUtils {
 		
 		try {
 			DeviceUtilsInterface iosDriver = new IOSUtils(driver);
+			
 			DeviceUtilsInterface androidDriver = new AndroidUtils(driver);
 			System.out.println(iosDriver.getDeviceProperty("os"));
 			/*
@@ -55,8 +56,14 @@ public class TestIOSUtils {
 			 
 			iosDriver.toggleWiFi(false);
 			*/
-			androidDriver.sendSMSFullNavigation("Hello", "+972542288664");
-			androidDriver.sendSMS("Hello", "+972542288664");
+			
+			//ANDROID SECTION
+			/*//androidDriver.sendSMS("Hello", "+972542288664");
+			if (androidDriver.placeCall("+972542288664"))
+				androidDriver.endCall();*/
+			
+			androidDriver.toggleWiFi(false);
+			androidDriver.toggleWiFi(true);
 			
 			System.out.println("Hello");
 			
