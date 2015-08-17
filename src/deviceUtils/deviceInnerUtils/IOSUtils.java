@@ -1,4 +1,4 @@
-private package deviceUtils.deviceHiddenUtils;
+private package deviceUtils.deviceInnerUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,19 +9,17 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.perfectomobile.httpclient.execution.DeviceProperty;
 
-import deviceUtils.DeviceUtilsInterface;
+import deviceUtils.DeviceUtils;
 import testUtils.PerfectoUtils;
 
- public class IOSUtils implements DeviceUtilsInterface{
+ public class IOSUtils{
 
 	 	public static RemoteWebDriver driver;
-		private static Map<String, String> deviceProperties;
-		private String os;
 		
 	public IOSUtils(RemoteWebDriver driver) {
 		this.driver = driver;
-		PerfectoUtils.getDeviceProperties(driver);
-		os = PerfectoUtils.getDeviceProperty("os");
+		//PerfectoUtils.getDeviceProperties(driver);
+		//os = PerfectoUtils.getDeviceProperty("os");
 		
 	}
 	
@@ -293,11 +291,7 @@ import testUtils.PerfectoUtils;
 
 	}
 
-	@Override
-	public String getDeviceProperty(String Property) {
-		return PerfectoUtils.getDeviceProperty(Property);
-	}
-
+	
 	
 }
 

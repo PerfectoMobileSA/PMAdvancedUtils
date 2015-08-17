@@ -2,11 +2,10 @@ package tempTests;
 
 
 
-import deviceUtils.DeviceUtilsInterface;
 //import deviceUtils.deviceHiddenUtils.IOSUtils;
 
-import deviceUtils.deviceHiddenUtils.AndroidUtils;
-import deviceUtils.deviceHiddenUtils.IOSUtils;
+import deviceUtils.*;
+import deviceUtils.deviceInnerUtils.pmCommands.Application;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -19,6 +18,9 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+
+
 
 
 
@@ -42,10 +44,10 @@ public class TestIOSUtils {
 		
 		
 		try {
-			DeviceUtilsInterface iosDriver = new IOSUtils(driver);
+			DeviceUtils utilDriver = new DeviceUtils(driver);
 			
-			DeviceUtilsInterface androidDriver = new AndroidUtils(driver);
-			System.out.println(iosDriver.getDeviceProperty("os"));
+			
+			System.out.println(utilDriver.getDeviceProperty("os"));
 			/*
 			iosDriver.sendSMS("Hello","+972542288664");
 			if (iosDriver.placeCall("+972542288664"))
@@ -60,10 +62,16 @@ public class TestIOSUtils {
 			//ANDROID SECTION
 			/*//androidDriver.sendSMS("Hello", "+972542288664");
 			if (androidDriver.placeCall("+972542288664"))
-				androidDriver.endCall();*/
+				androidDriver.endCall();
 			
-			androidDriver.toggleWiFi(false);
-			androidDriver.toggleWiFi(true);
+			utilDriver.toggleWiFi(false);
+			utilDriver.toggleWiFi(true);
+			*/
+			Application app = utilDriver.setApplication("Maps");
+			//app.start();
+			//app.close();
+			Object obj = app.install("PRIVATE:apps\\Android\\Amex");
+			System.out.println(obj.toString());
 			
 			System.out.println("Hello");
 			

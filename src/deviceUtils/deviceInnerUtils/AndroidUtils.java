@@ -1,4 +1,4 @@
-private package deviceUtils.deviceHiddenUtils;
+private package deviceUtils.deviceInnerUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,10 +9,10 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.perfectomobile.httpclient.execution.DeviceProperty;
 
-import deviceUtils.DeviceUtilsInterface;
+
 import testUtils.PerfectoUtils;
 
- public class AndroidUtils implements DeviceUtilsInterface{
+ public class AndroidUtils{
 
 	 	public static RemoteWebDriver driver;
 		private static Map<String, String> deviceProperties;
@@ -311,11 +311,6 @@ public void toggleData(boolean state) {
 		  		  
 	  }
 
-	@Override
-	public String getDeviceProperty(String Property) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 }
 
