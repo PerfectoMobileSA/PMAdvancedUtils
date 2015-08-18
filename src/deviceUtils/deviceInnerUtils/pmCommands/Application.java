@@ -1,6 +1,9 @@
 private package deviceUtils.deviceInnerUtils.pmCommands;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -11,7 +14,7 @@ import com.perfectomobile.selenium.api.IMobileDevice;
  * @author shirk
  *
  */
-public final class Application extends Command{
+public class Application extends Command{
 	
 	private String appName;
 	private String appIdentifier;
@@ -19,12 +22,12 @@ public final class Application extends Command{
 	private boolean instrumentApp;
 	private Certificate certificate;
 	
-	public Application(RemoteWebDriver driver) {
-		super(driver);
+	public Application(RemoteWebDriver driver, String os) {
+		super(driver, os);
 		this.appName=null;
 	}
-	public Application(RemoteWebDriver driver, String appName) {
-		super(driver);
+	public Application(RemoteWebDriver driver, String os, String appName) {
+		super(driver, os);
 		this.appName = appName;
 		this.instrumentApp = false;
 		this.certificate = null;
@@ -149,17 +152,40 @@ public final class Application extends Command{
 		 
 	 }
 	 
-	/* public boolean getDeviceApplication(){
+	 public String getDeviceApplicationsNames(){
 		  try {
-			  Map<String, String> params = new HashMap<>();
-			  //params.put("command", "application find ");
-			  params.put("handsetId", device.getDeviceId());
-			  String listOfApps = (String) device.executeGenericCommand("application", "find", params);
-			  return true;
+			  if (!isAndroid()){
+					 System.out.println("This method is unsupported on this os version");
+					 return null;
+				 }
+			  Map<String, Object> params = new HashMap<>();
+			  params.put("format", "name");
+			  Object res = driver.executeScript("mobile:application:find", params);
+			 return res.toString();
+
 		} catch (Exception e) {
-			return false;
+			e.printStackTrace();
+			return null;
 		}
-	 }*/
+	 }
+	 
+	 public String getDeviceApplicationsIdentifiers(){
+		  try {
+			 if (!isAndroid()){
+				 System.out.println("This method is unsupported on this os version");
+				 return null;
+			 }
+				 
+			 Map<String, Object> params = new HashMap<>();
+			 params.put("format", "identifier");
+			 Object result = driver.executeScript("mobile:application:find", params);
+			 return result.toString();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	 }
 	 
 	 private class Certificate{
 		 

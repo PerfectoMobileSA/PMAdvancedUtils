@@ -15,9 +15,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 
 
@@ -70,8 +72,10 @@ public class TestIOSUtils {
 			Application app = utilDriver.setApplication("Maps");
 			//app.start();
 			//app.close();
-			Object obj = app.install("PRIVATE:apps\\Android\\Amex");
-			System.out.println(obj.toString());
+			//Object obj = app.install("PRIVATE:apps\\Android\\Amex");
+			//System.out.println(obj.toString());
+			String names= app.getDeviceApplicationsIdentifiers();
+			names = app.getDeviceApplicationsNames();
 			
 			System.out.println("Hello");
 			

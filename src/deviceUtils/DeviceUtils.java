@@ -22,7 +22,7 @@ public class DeviceUtils {
 		this.driver = driver;
 		this.androidUtils = null;
 		this.iosUtils = null;
-		this.application= new Application(driver);
+		this.application= new Application(driver,os);
 		
 		deviceProperties = PerfectoUtils.getDeviceProperties(driver);
 		os = deviceProperties.get("os");
