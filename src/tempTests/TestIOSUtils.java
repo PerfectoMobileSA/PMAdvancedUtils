@@ -69,13 +69,20 @@ public class TestIOSUtils {
 			utilDriver.toggleWiFi(false);
 			utilDriver.toggleWiFi(true);
 			*/
-			Application app = utilDriver.setApplication("Maps");
-			//app.start();
-			//app.close();
-			//Object obj = app.install("PRIVATE:apps\\Android\\Amex");
-			//System.out.println(obj.toString());
-			String names= app.getDeviceApplicationsIdentifiers();
-			names = app.getDeviceApplicationsNames();
+			
+			/**
+			 * APPLICATION TESTS
+			 */
+			Application app = utilDriver.getApplication();
+			System.out.println(app.startAppByName("Maps", 5));
+			System.out.println(app.closeAppByIdentifier("com.google.android.apps.maps"));
+			System.out.println(app.cleanAppByIdentifier("com.google.android.apps.maps"));
+			System.out.println(app.cleanAppByName("Maps"));
+			System.out.println(app.installApp("PRIVATE:apps\\Android\\AMEX.apk", false));
+			System.out.println(app.uninstallAppByIdentifier("com.yelp.android"));
+			System.out.println(app.getApplicationsNames());
+			System.out.println(app.getApplicationsIdentifiers());
+			
 			
 			System.out.println("Hello");
 			

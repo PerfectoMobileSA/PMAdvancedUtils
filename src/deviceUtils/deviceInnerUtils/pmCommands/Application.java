@@ -16,24 +16,30 @@ import com.perfectomobile.selenium.api.IMobileDevice;
  */
 public class Application extends Command{
 	
-	private String appName;
-	private String appIdentifier;
+	//private String appName;
+	//private String appIdentifier;
 	private String repositoryKey;
 	private boolean instrumentApp;
 	private Certificate certificate;
 	
 	public Application(RemoteWebDriver driver, String os) {
 		super(driver, os);
-		this.appName=null;
+		//this.appName=null;
+		//this.appIdentifier = null;
+		this.instrumentApp = false;
+		this.certificate = null;
+		
 	}
+	/*
 	public Application(RemoteWebDriver driver, String os, String appName) {
 		super(driver, os);
 		this.appName = appName;
 		this.instrumentApp = false;
 		this.certificate = null;
+		this.appIdentifier = null;
 	}
-		
-	public String getAppName() {
+	*/	
+	/*public String getAppName() {
 		return this.appName;
 	}
 
@@ -41,29 +47,56 @@ public class Application extends Command{
 		this.appName = appName;
 	}
 	
+	public String getAppIdentifier() {
+		return this.appIdentifier;
+	}
+
+	public void setAppIdentifier(String appIdentifier) {
+		this.appIdentifier = appIdentifier;
+	}
+	
+	public void setApp(String appName, String appIdentifier) {
+		this.appName = appName;
+		this.appIdentifier = appIdentifier;
+	}
+	
 	public void setCertificate(String certificateKey, String certificationUser,
 				String certificationPassword, String certificationParams){
 		
 		this.certificate = new Certificate(certificateKey, certificationUser, certificationPassword, certificationParams);
 		
-	}
+	}*/
 
 	/*****************************************************************************
 	 * Applications Commands
 	 ****************************************************************************/
+	
 	/**********************************************************
-	 * closes an application with the "appName" name.
+	 * closes an application with the "appName" name or appIdentifier set before.
 	 * returns true/false Upon success
 	 ***********************************************************/
-	 public boolean close() {
+	/* public boolean close() {
+		boolean result=false;		
 		Map<String, Object> params = new HashMap<>();
-		if (appName==null)
+		if (this.appName==null && this.appIdentifier == null)
 		{
-			System.out.println("no application is set. use setApp command first");
+			System.out.println("no applicationName or applicationIdentifier is set. use setApp command first");
 			return false;
 		}
+		if (this.appName!=null)
+			result=closeAppByName(this.appName);
 		
-		params.put("name", this.appName);
+		if (result)
+			return true;
+		
+		return closeAppByIdentifier(this.appIdentifier);
+			
+	 }*/
+	 
+	 public boolean closeAppByName(String appName){
+		 Map<String, Object> params = new HashMap<>();
+		 params.put("name", appName);
+		
 		try {
 			driver.executeScript("mobile:application:close", params);
 			return true;
@@ -71,34 +104,57 @@ public class Application extends Command{
 			System.out.println("failed to close application " + appName);
 			return false;
 		}
-	
 	 }
+	 
+	 public boolean closeAppByIdentifier(String appIdentifier){
+		 Map<String, Object> params = new HashMap<>();
+		 params.put("identifier", appIdentifier);
+		
+		try {
+			driver.executeScript("mobile:application:close", params);
+			return true;
+		} catch (Exception e) {
+			System.out.println("failed to close application " + appIdentifier);
+			return false;
+		}
+	 }
+	 
 	 
 	 /**********************************************************
 	 * Launches an application with the "appIdentifier" name.
-	 * returns true/false Upon success
+	 * returns true/false Upon success. timeout=seconds
 	 **********************************************************/
-	 public boolean start() {
+	 public boolean startAppByName(String appName, int timeout) {
 		
 		 Map<String, Object> params = new HashMap<>();
-			if (appName==null)
-			{
-				System.out.println("no application is set. use setApp command first");
-				return false;
-			}
 			
-			params.put("name", this.appName);
-			try {
-				driver.executeScript("mobile:application:open", params);
-				return true;
-			} catch (Exception e) {
-				System.out.println("failed to open application " + appName);
-				return false;
-			}
+		params.put("name", appName);
+		try {
+			driver.executeScript("mobile:application:open", params);
+			return true;
+		} catch (Exception e) {
+			System.out.println("failed to open application " + appName);
+			return false;
+		}
 			    
 	}
 	 
-	 public boolean install(String repositoryKey, boolean instrumentation, Certificate certificate ){
+	 public boolean startAppByIdentifier(String appIdentifier, int timeout) {
+			
+		 Map<String, Object> params = new HashMap<>();
+			
+		params.put("identifier", appIdentifier);
+		try {
+			driver.executeScript("mobile:application:open", params);
+			return true;
+		} catch (Exception e) {
+			System.out.println("failed to open application " + appIdentifier);
+			return false;
+		}
+			    
+	}
+	 
+	 public boolean installApp(String repositoryKey, boolean instrumentation, Certificate certificate ){
 		Map<String, Object> params = new HashMap<>();
 		
 		try {
@@ -121,38 +177,38 @@ public class Application extends Command{
 			return false;
 		}
 	 }
-	 public boolean install(String repositoryKey){
-		 
-		 return install(repositoryKey,false,null);
-	 }
-	 public boolean install(String repositoryKey, boolean instrumentation){
-		 return install(repositoryKey,instrumentation,null);
+	 
+	 public boolean installApp(String repositoryKey, boolean instrumentation){
+		 return installApp(repositoryKey,instrumentation,null);
 		
 		
 	 }
-	 public boolean uninstall() {
-		 Map<String, Object> params = new HashMap<>();
-			if (appName==null)
-			{
-				System.out.println("no application is set. use setApp command first");
-				return false;
-			}
-			
-			params.put("name", this.appName);
+	 public boolean uninstallAppByName(String appName) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("name", appName);
+		try {
+			driver.executeScript("mobile:application:uninstall", params);
+			return true;
+		} catch (Exception e) {
+			System.out.println("failed to uninstall application " + appName);
+			return false;
+		}
+	 
+	 }
+	 public boolean uninstallAppByIdentifier(String appIdentifier) {
+			Map<String, Object> params = new HashMap<>();
+			params.put("identifier", appIdentifier);
 			try {
 				driver.executeScript("mobile:application:uninstall", params);
 				return true;
 			} catch (Exception e) {
-				System.out.println("failed to uninstall application " + appName);
+				System.out.println("failed to uninstall application " + appIdentifier);
 				return false;
 			}
-
-
-		
 		 
-	 }
+		 }
 	 
-	 public String getDeviceApplicationsNames(){
+	 public String getApplicationsNames(){
 		  try {
 			  if (!isAndroid()){
 					 System.out.println("This method is unsupported on this os version");
@@ -169,7 +225,7 @@ public class Application extends Command{
 		}
 	 }
 	 
-	 public String getDeviceApplicationsIdentifiers(){
+	 public String getApplicationsIdentifiers(){
 		  try {
 			 if (!isAndroid()){
 				 System.out.println("This method is unsupported on this os version");
@@ -185,6 +241,43 @@ public class Application extends Command{
 			e.printStackTrace();
 			return null;
 		}
+	 }
+	
+	 public boolean cleanAppByName(String appName){
+		 try {
+			if (!isAndroid()){
+				 System.out.println("This method is unsupported on this os version");
+				 return false;
+			 }
+			Map<String, Object> params = new HashMap<>();
+			params.put("name", appName);
+			
+			Object result = driver.executeScript("mobile:application:clean", params);
+			if (result.toString().equals("OK"))
+				return true;
+			
+			return false;
+		} catch (Exception e) {
+			return false;
+		} 
+	 }
+	 public boolean cleanAppByIdentifier(String appIdentifier){
+		 try {
+			if (!isAndroid()){
+				 System.out.println("This method is unsupported on this os version");
+				 return false;
+			 }
+			Map<String, Object> params = new HashMap<>();
+			params.put("identifier", appIdentifier);
+			
+			Object result = driver.executeScript("mobile:application:clean", params);
+			if (result.toString().equals("OK"))
+				return true;
+			
+			return false;
+		 } catch (Exception e) {
+			return false;
+		} 
 	 }
 	 
 	 private class Certificate{

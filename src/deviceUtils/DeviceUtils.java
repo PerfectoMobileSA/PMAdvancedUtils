@@ -22,8 +22,7 @@ public class DeviceUtils {
 		this.driver = driver;
 		this.androidUtils = null;
 		this.iosUtils = null;
-		this.application= new Application(driver,os);
-		
+				
 		deviceProperties = PerfectoUtils.getDeviceProperties(driver);
 		os = deviceProperties.get("os");
 		
@@ -32,6 +31,7 @@ public class DeviceUtils {
 		else
 			this.iosUtils = new IOSUtils(driver);
 		
+		this.application= new Application(driver,os);
 		
 	}
 	//boolean launchSMSApp();
@@ -115,16 +115,16 @@ public class DeviceUtils {
 	/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	  @ BEGIN: Application Commands Section	
 	  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
-	public Application setApplication(String appName){
+	/*public Application setApplication(String appName){
 		try {
-			application = new Application(driver,appName);
+			application = new Application(driver,os);
 			return application;
 		} catch (Exception e) {
 			return null;
 		}
 		
-	}
-	public Application getApplication(String appName){
+	}*/
+	public Application getApplication(){
 		return application;
 	}
 	/**********************************************************
