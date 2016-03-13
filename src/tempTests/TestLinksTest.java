@@ -86,8 +86,8 @@ public class TestLinksTest {
 				String browserName = "mobileOS";
 				capabilities = new DesiredCapabilities(browserName, "", Platform.ANY);
 				String host = "demo.perfectomobile.com";
-				String user = URLEncoder.encode("shirk@perfectomobile.com", "UTF-8");
-				String password = URLEncoder.encode("Shitaki1", "UTF-8");
+				String user = URLEncoder.encode("XXXXXX@perfectomobile.com", "UTF-8");
+				String password = URLEncoder.encode("SSSSS", "UTF-8");
 				capabilities.setCapability("description", "ShirNate");
 				capabilities.setCapability("platformName", "Android");
 				
